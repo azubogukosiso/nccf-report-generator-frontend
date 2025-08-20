@@ -1,0 +1,38 @@
+[
+  {
+    "unitName": "Battle Axe Drama Unit",
+    "unitId": 1
+  },
+  {
+    "unitName": "Bible Study Unit",
+    "unitId": 2
+  },
+  {
+    "unitName": "Children Evangelism Unit",
+    "unitId": 3
+  },
+  {
+    "unitName": "Evangelism Unit",
+    "unitId": 4
+  },
+  {
+    "unitName": "King's Psalmist Choir Unit",
+    "unitId": 5
+  },
+  {
+    "unitName": "Media and Publicity Unit",
+    "unitId": 6
+  },
+  {
+    "unitName": "Prayer Unit",
+    "unitId": 7
+  },
+  {
+    "unitName": "Sister's Fellowship Unit",
+    "unitId": 8
+  },
+  {
+    "unitName": "Transport and Organizing Unit",
+    "unitId": 9
+  }
+]
