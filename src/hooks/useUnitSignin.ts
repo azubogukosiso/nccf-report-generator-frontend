@@ -8,8 +8,6 @@ export const useUnitSignin = () => {
   const signin = async (unitName: string, password: string) => {
     const unitId = getUnitIdByName(units, unitName);
 
-    console.log("unit ID here: ", unitId);
-
     const response = await fetch("http://localhost:3000/api/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -17,8 +15,6 @@ export const useUnitSignin = () => {
     });
 
     const json = await response.json();
-
-    console.log("response here: ", json);
 
     if (response.ok) {
       // SAVE THE USER TO LOCAL STORAGE

@@ -61,7 +61,7 @@ const SignInComponent = () => {
         </select>
       </div>
 
-      <button className="w-full py-2 text-white transition-colors bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900">
+      <button className="w-full py-2 text-white transition-all bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900 active:scale-[0.95]">
         Sign In
       </button>
 

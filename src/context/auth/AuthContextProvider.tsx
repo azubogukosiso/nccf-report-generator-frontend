@@ -14,11 +14,17 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   });
 
   useEffect(() => {
-    const unit = localStorage.getItem("unit");
+    async function fetchData() {
+      const unit = localStorage.getItem("unit");
 
-    if (unit) {
-      dispatch({ type: "LOGIN", payload: unit });
+      const parsedUnit = await JSON.parse(unit as string);
+
+      if (parsedUnit) {
+        dispatch({ type: "LOGIN", payload: parsedUnit });
+      }
     }
+
+    fetchData();
   }, []);
 
   console.log("AuthContext state: ", state);
