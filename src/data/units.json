@@ -1,0 +1,94 @@
+[
+  {
+    "unitName": "Battle Axe Drama Unit",
+    "unitId": 1,
+    "recordFields": {
+      "date": "",
+      "title": "",
+      "text": "",
+      "attendance": 0,
+      "venue": ""
+    }
+  },
+  {
+    "unitName": "Bible Study Unit",
+    "unitId": 2,
+    "recordFields": {
+      "date": "",
+      "topic": "",
+      "text": "",
+      "minister": "",
+      "attendance": 0,
+      "venue": ""
+    }
+  },
+  {
+    "unitName": "Children Evangelism Unit",
+    "unitId": 3,
+    "recordFields": {
+      "date": "",
+      "topic": "",
+      "text": "",
+      "minister": "",
+      "attendance": 0,
+      "venue": ""
+    }
+  },
+  {
+    "unitName": "Evangelism Unit",
+    "unitId": 4,
+    "recordFields": {
+      "date": "",
+      "attendance": 0,
+      "numOfSoulsPreachedTo": 0,
+      "numConverted": 0,
+      "numOfSoulsHealed": 0,
+      "venue": ""
+    }
+  },
+  {
+    "unitName": "King's Psalmist Choir Unit",
+    "unitId": 5,
+    "recordFields": {
+      "date": "",
+      "minister": "",
+      "songTitle": "",
+      "artist": "",
+      "attendance": 0,
+      "venue": ""
+    }
+  },
+  {
+    "unitName": "Media and Publicity Unit",
+    "unitId": 6
+  },
+  {
+    "unitName": "Prayer Unit",
+    "unitId": 7,
+    "recordFields": {
+      "date": "",
+      "program": "",
+      "minister": "",
+      "topic": "",
+      "text": "",
+      "attendance": 0,
+      "venue": ""
+    }
+  },
+  {
+    "unitName": "Sister's Fellowship Unit",
+    "unitId": 8,
+    "recordFields": {
+      "date": "",
+      "minister": "",
+      "topic": "",
+      "text": "",
+      "attendance": 0,
+      "venue": ""
+    }
+  },
+  {
+    "unitName": "Transport and Organizing Unit",
+    "unitId": 9
+  }
+]
