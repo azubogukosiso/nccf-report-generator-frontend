@@ -1,14 +1,24 @@
 import { Link } from "react-router-dom";
 
 type RecordComponentProps = {
+  index: number;
   month: string;
   year: string;
   id: string;
+  recordNum: number;
 };
 
-const RecordComponent = ({ month, year, id }: RecordComponentProps) => {
+const RecordComponent = ({
+  index,
+  month,
+  year,
+  id,
+  recordNum,
+}: RecordComponentProps) => {
   return (
-    <div className="flex w-full p-10 border-b-2">
+    <div
+      className={`flex w-full p-10 ${index !== recordNum - 1 && "border-b"}`}
+    >
       <div className="w-[20%] flex items-center justify-center">
         <svg
           viewBox="0 0 24 24"
@@ -26,7 +36,7 @@ const RecordComponent = ({ month, year, id }: RecordComponentProps) => {
         </h2>
         <div>
           <Link
-            to={`/input-record?id=${id}`}
+            to={`/edit-record?id=${id}`}
             className="px-3 py-[0.7rem] mr-5 text-white transition-all bg-blue-800 rounded-lg hover:bg-blue-900 active:scale-[0.95]"
           >
             Edit Record

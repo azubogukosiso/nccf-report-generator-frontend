@@ -1,20 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 
-import type { recordDataType } from "../types/recordDataType";
-
+import InputRecordsComponent from "../components/InputRecordsComponent";
 import NavbarComponent from "../components/NavbarComponent";
-import RecordComponent from "../components/RecordComponent";
 
 import { useAuthContext } from "../hooks/useAuthContext";
-import { capitalizeFirstLetter } from "../functions/capitalizeFirstLetter";
 
-const ViewRecordsPage = () => {
+type IDProps = {
+  recordId: string | null;
+};
+
+const InputRecordsPage = ({ recordId }: IDProps) => {
   const { unit } = useAuthContext();
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["viewRecordsPageData"],
+    queryKey: ["editRecordsPageData", recordId],
     queryFn: () =>
-      fetch("http://localhost:3000/api/records").then((res) => res.json()),
+      fetch(`http://localhost:3000/api/records${"?id=" + recordId}`).then(
+        (res) => res.json()
+      ),
+    staleTime: 0,
+    gcTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   if (isPending) return "Loading...";
@@ -40,25 +47,17 @@ const ViewRecordsPage = () => {
               <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z" />
             </svg>
           </label>
-          <h1>All Records</h1>
+          <h1>Edit Records</h1>
         </div>
 
         <p>Unit: {unit?.unitName}</p>
       </div>
-      <div className="flex flex-col items-center justify-center">
-        {data.map((record: recordDataType, index: number) => (
-          <RecordComponent
-            key={record._id}
-            index={index}
-            month={capitalizeFirstLetter(record.month)}
-            year={record.year}
-            id={record._id}
-            recordNum={data.length}
-          />
-        ))}
+
+      <div className="flex items-center justify-center">
+        <InputRecordsComponent recordDetails={data} recordId={recordId} />
       </div>
     </>
   );
 };
 
-export default ViewRecordsPage;
+export default InputRecordsPage;
