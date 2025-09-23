@@ -25,7 +25,8 @@ const BattleAxeRecordFieldComponent = ({
           value={recordData?.date}
           onChange={handleChange}
           required
-          className="focus:!outline-none rounded-t-md bg-white p-2 w-1/2 border-b"
+          className="focus:!outline-none rounded-t-md bg-white p-2 w-1/2 border-b text-black"
+          style={{ colorScheme: "light" }}
         />
       </div>
 

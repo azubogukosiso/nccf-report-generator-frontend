@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import type { recordDataType } from "../types/recordDataType";
 
@@ -7,15 +7,29 @@ import RecordComponent from "../components/RecordComponent";
 
 import { useAuthContext } from "../hooks/useAuthContext";
 import { capitalizeFirstLetter } from "../functions/capitalizeFirstLetter";
+import { deleteRecords } from "../functions/deleteRecords";
 
 const ViewRecordsPage = () => {
   const { unit } = useAuthContext();
+
+  const queryClient = useQueryClient();
 
   const { isPending, error, data } = useQuery({
     queryKey: ["viewRecordsPageData"],
     queryFn: () =>
       fetch("http://localhost:3000/api/records").then((res) => res.json()),
   });
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteRecords,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["viewRecordsPageData"] });
+    },
+  });
+
+  const handleDelete = (id: string) => {
+    deleteMutation.mutate(id);
+  };
 
   if (isPending) return "Loading...";
 
@@ -54,6 +68,7 @@ const ViewRecordsPage = () => {
             year={record.year}
             id={record._id}
             recordNum={data.length}
+            onDelete={() => handleDelete(record._id)}
           />
         ))}
       </div>

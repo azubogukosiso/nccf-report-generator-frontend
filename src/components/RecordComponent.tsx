@@ -6,6 +6,7 @@ type RecordComponentProps = {
   year: string;
   id: string;
   recordNum: number;
+  onDelete: () => void;
 };
 
 const RecordComponent = ({
@@ -14,6 +15,7 @@ const RecordComponent = ({
   year,
   id,
   recordNum,
+  onDelete,
 }: RecordComponentProps) => {
   return (
     <div
@@ -47,12 +49,12 @@ const RecordComponent = ({
           >
             Generate Report
           </Link>
-          <Link
-            to="#"
-            className="px-3 py-[0.7rem] text-white transition-all bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900 active:scale-[0.95]"
+          <button
+            onClick={onDelete}
+            className="px-3 py-[0.5rem] text-white transition-all bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900 active:scale-[0.95]"
           >
             Delete Record
-          </Link>
+          </button>
         </div>
       </div>
     </div>
