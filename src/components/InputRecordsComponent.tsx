@@ -109,7 +109,7 @@ const InputRecordsComponent = ({
           onClick={(e) =>
             recordDetails
               ? editRecords(e, { records, month, year, recordId })
-              : saveRecords(e, { records, month, year })
+              : saveRecords(e, { records, month, year, unitId: unit?.unitId })
           }
         >
           Save all records

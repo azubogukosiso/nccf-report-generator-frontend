@@ -1,16 +1,10 @@
-import type { recordFieldType } from "../types/recordFieldType";
+import type { recordFieldProps } from "../../types/recordFieldProps";
 
-type BattleAxeRecordFieldProps = {
-  handleChange: React.ChangeEventHandler<HTMLInputElement>;
-  index: number;
-  recordData: recordFieldType;
-};
-
-const BattleAxeRecordFieldComponent = ({
+const BibleStudyRecordFieldComponent = ({
   handleChange,
   index,
   recordData,
-}: BattleAxeRecordFieldProps) => {
+}: recordFieldProps) => {
   return (
     <>
       <div className="flex flex-col items-center w-full mb-5">
@@ -63,6 +57,22 @@ const BattleAxeRecordFieldComponent = ({
       </div>
 
       <div className="flex flex-col items-center w-full mb-5">
+        <label htmlFor={`minister${index + 1}`} className="w-1/2 text-xs">
+          Minister:
+        </label>
+        <input
+          type="text"
+          placeholder="Enter minister..."
+          id={`minister${index + 1}`}
+          name={`minister${index + 1}`}
+          value={recordData?.minister}
+          onChange={handleChange}
+          required
+          className="focus:!outline-none rounded-t-md bg-white p-2 w-1/2 border-b"
+        />
+      </div>
+
+      <div className="flex flex-col items-center w-full mb-5">
         <label htmlFor={`attendance${index + 1}`} className="w-1/2 text-xs">
           Attendance:
         </label>
@@ -98,4 +108,4 @@ const BattleAxeRecordFieldComponent = ({
   );
 };
 
-export default BattleAxeRecordFieldComponent;
+export default BibleStudyRecordFieldComponent;

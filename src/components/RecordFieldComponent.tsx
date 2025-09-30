@@ -1,7 +1,16 @@
 import { removeRecordField } from "../functions/removeRecordField";
-import BattleAxeRecordFieldComponent from "./BattleAxeRecordFieldComponent";
+
+import BattleAxeRecordFieldComponent from "./unitFieldComponents/BattleAxeRecordFieldComponent";
+import BibleStudyRecordFieldComponent from "./unitFieldComponents/BibleStudyRecordFieldComponent";
+import ChildrenEvangRecordFieldComponent from "./unitFieldComponents/ChildrenEvangRecordFieldComponent";
+import EvangRecordFieldComponent from "./unitFieldComponents/EvangRecordFieldComponent";
+import PrayerRecordFieldComponent from "./unitFieldComponents/PrayerRecordFieldComponent";
+import SistersRecordFieldComponent from "./unitFieldComponents/SistersRecordFieldComponent";
+
 import { useAuthContext } from "../hooks/useAuthContext";
+
 import type { recordFieldType } from "../types/recordFieldType";
+import KPCRecordFieldComponent from "./unitFieldComponents/KPCRecordFieldComponent";
 
 type RecordFieldProps = {
   index: number;
@@ -46,6 +55,54 @@ const RecordFieldComponent = ({
     >
       {unit?.unitId === 1 && (
         <BattleAxeRecordFieldComponent
+          handleChange={handleChange}
+          index={index}
+          recordData={recordData}
+        />
+      )}
+
+      {unit?.unitId === 2 && (
+        <BibleStudyRecordFieldComponent
+          handleChange={handleChange}
+          index={index}
+          recordData={recordData}
+        />
+      )}
+
+      {unit?.unitId === 3 && (
+        <ChildrenEvangRecordFieldComponent
+          handleChange={handleChange}
+          index={index}
+          recordData={recordData}
+        />
+      )}
+
+      {unit?.unitId === 4 && (
+        <EvangRecordFieldComponent
+          handleChange={handleChange}
+          index={index}
+          recordData={recordData}
+        />
+      )}
+
+      {unit?.unitId === 5 && (
+        <KPCRecordFieldComponent
+          handleChange={handleChange}
+          index={index}
+          recordData={recordData}
+        />
+      )}
+
+      {unit?.unitId === 7 && (
+        <PrayerRecordFieldComponent
+          handleChange={handleChange}
+          index={index}
+          recordData={recordData}
+        />
+      )}
+
+      {unit?.unitId === 8 && (
+        <SistersRecordFieldComponent
           handleChange={handleChange}
           index={index}
           recordData={recordData}

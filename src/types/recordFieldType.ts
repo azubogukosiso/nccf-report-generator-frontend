@@ -5,11 +5,11 @@ export type recordFieldType =
       venue: string;
       text?: string;
       title?: string;
-      topic?: string;
       minister?: string;
       numOfSoulsPreachedTo?: number;
       numConverted?: number;
       numOfSoulsHealed?: number;
+      numFollowedUp?: number;
       songTitle?: string;
       artist?: string;
       program?: string;
