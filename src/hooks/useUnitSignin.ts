@@ -8,11 +8,14 @@ export const useUnitSignin = () => {
   const signin = async (unitName: string, password: string) => {
     const unitId = getUnitIdByName(units, unitName);
 
-    const response = await fetch("http://localhost:3000/api/auth/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ unitId, password }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/auth/signin`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ unitId, password }),
+      }
+    );
 
     const json = await response.json();
 

@@ -13,7 +13,7 @@ export const saveRecords = async (
 
   console.log("here we are: ", recordToSave);
 
-  const res = await fetch("http://localhost:3000/api/records/", {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/records/`, {
     method: "POST",
     credentials: "include",
     headers: {

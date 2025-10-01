@@ -15,8 +15,8 @@ const InputRecordsPage = ({ recordId }: IDProps) => {
   const { isPending, error, data } = useQuery({
     queryKey: ["editRecordsPageData", recordId],
     queryFn: () =>
-      fetch(`http://localhost:3000/api/records?id=${recordId}`).then((res) =>
-        res.json()
+      fetch(`${import.meta.env.VITE_API_URL}/records?id=${recordId}`).then(
+        (res) => res.json()
       ),
     staleTime: 0,
     gcTime: 0,

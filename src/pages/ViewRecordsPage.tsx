@@ -17,9 +17,9 @@ const ViewRecordsPage = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["viewRecordsPageData"],
     queryFn: () =>
-      fetch(`http://localhost:3000/api/records?unitId=${unit?.unitId}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `${import.meta.env.VITE_API_URL}/records?unitId=${unit?.unitId}`
+      ).then((res) => res.json()),
   });
 
   const deleteMutation = useMutation({

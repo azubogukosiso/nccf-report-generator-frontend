@@ -14,7 +14,7 @@ export const editRecords = async (
   console.log("edited records: ", editedRecords);
 
   const res = await fetch(
-    `http://localhost:3000/api/records?id=${editedRecords.recordId}`,
+    `${import.meta.env.VITE_API_URL}/records?id=${editedRecords.recordId}`,
     {
       method: "POST",
       credentials: "include",
