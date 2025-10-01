@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useLogout } from "../hooks/useLogout";
 
 const NavbarComponent = () => {
+  const { logout } = useLogout();
+
   return (
     <div className="drawer">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -19,7 +22,7 @@ const NavbarComponent = () => {
             <Link to="/records">All Records</Link>
           </li>
           <li className="mt-2">
-            <Link to="/reports">All Reports </Link>
+            <Link to="/reports">All Reports</Link>
           </li>
           <li className="mt-2">
             <Link to="/change-password">Change Password</Link>
@@ -28,7 +31,7 @@ const NavbarComponent = () => {
             <Link to="/input-report">Generate Situational Report</Link>
           </li>
           <li className="mt-2">
-            <Link to="#">Log Out</Link>
+            <button onClick={() => logout()}>Log Out</button>
           </li>
         </ul>
       </div>
