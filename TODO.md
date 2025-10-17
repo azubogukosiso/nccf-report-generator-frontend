@@ -11,3 +11,4 @@
 1.  Remove record feat.
 2.  Fix numbering problem with "follow up field" for evang. component
 3.  Loading status on submit for forms & toast notifications
+4.  Trim response fields to needed fields for report generation

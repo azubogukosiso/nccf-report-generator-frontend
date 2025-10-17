@@ -56,7 +56,11 @@ function App() {
         <Route
           path="input-report"
           element={
-            unit ? <InputReportDetailsPage /> : <Navigate to="/signin" />
+            unit ? (
+              <InputReportDetailsPage recordId={recordId} />
+            ) : (
+              <Navigate to="/signin" />
+            )
           }
         ></Route>
         <Route

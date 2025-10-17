@@ -1,4 +1,30 @@
-const InputReportDetailsComponent = () => {
+import { useState } from "react";
+
+import { saveReports } from "../functions/saveReports";
+
+import { useAuthContext } from "../hooks/useAuthContext";
+import type { recordFieldType } from "../types/recordFieldType";
+
+import ChallengesInputComponent from "./RichTextInputComponents/ChallengesInputComponent";
+import TestimoniesInputComponent from "./RichTextInputComponents/TestimoniesInputComponent";
+import PrayerRequestInputComponent from "./RichTextInputComponents/PrayerRequestInputComponent";
+
+type recordsDataProps = {
+  records: recordFieldType[];
+};
+
+const InputReportDetailsComponent = ({ records }: recordsDataProps) => {
+  const { unit } = useAuthContext();
+
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [appreciation, setAppreciation] = useState("");
+  const [challenges, setChallenges] = useState("");
+  const [testimonies, setTestimonies] = useState("");
+  const [prayerRequest, setPrayerRequest] = useState("");
+  const [conclusion, setConclusion] = useState("");
+  const [signature, setSignature] = useState("");
+
   return (
     <form className="w-full mb-20">
       <div className="flex items-center justify-between mb-20">
@@ -10,8 +36,11 @@ const InputReportDetailsComponent = () => {
             id="month"
             required
             name="month"
+            onChange={(e) => setMonth(e.target.value)}
+            value={month}
             className="focus:!outline-none rounded-t-md bg-white p-2 w-full border-b cursor-pointer"
           >
+            <option value=""></option>
             <option value="january">January</option>
             <option value="february">February</option>
             <option value="march">March</option>
@@ -35,8 +64,11 @@ const InputReportDetailsComponent = () => {
             id="year"
             required
             name="year"
+            onChange={(e) => setYear(e.target.value)}
+            value={year}
             className="focus:!outline-none rounded-t-md bg-white p-2 w-full border-b cursor-pointer"
           >
+            <option value=""></option>
             <option value="2024">2024</option>
             <option value="2025">2025</option>
             <option value="2026">2026</option>
@@ -45,84 +77,97 @@ const InputReportDetailsComponent = () => {
       </div>
 
       <div className="flex flex-col items-center w-full mb-5">
-        <label htmlFor="password" className="w-1/2 text-xs">
-          Password:
+        <label htmlFor="appreciation" className="w-1/2 text-xs">
+          Appreciation:
         </label>
         <input
-          type="password"
-          placeholder="Enter your password..."
-          id="password"
-          name="password"
+          type="text"
+          placeholder="Enter appreciation message..."
+          id="appreciation"
+          name="appreciation"
           required
+          onChange={(e) => setAppreciation(e.target.value)}
+          value={appreciation}
           className="focus:!outline-none rounded-t-md bg-white p-2 w-1/2 border-b"
         />
       </div>
 
       <div className="flex flex-col items-center w-full mb-5">
-        <label htmlFor="password" className="w-1/2 text-xs">
-          Password:
+        <label htmlFor="challenges" className="w-1/2 text-xs">
+          Challenges:
+        </label>
+
+        <ChallengesInputComponent setChallenges={setChallenges} />
+      </div>
+
+      <div className="flex flex-col items-center w-full mb-5">
+        <label htmlFor="testimonies" className="w-1/2 text-xs">
+          Testimonies:
+        </label>
+        <TestimoniesInputComponent setTestimonies={setTestimonies} />
+      </div>
+
+      <div className="flex flex-col items-center w-full mb-5">
+        <label htmlFor="prayerReq" className="w-1/2 text-xs">
+          Prayer Request:
+        </label>
+        <PrayerRequestInputComponent setPrayerRequest={setPrayerRequest} />
+      </div>
+
+      <div className="flex flex-col items-center w-full mb-5">
+        <label htmlFor="conclusion" className="w-1/2 text-xs">
+          Conclusion:
         </label>
         <input
-          type="password"
-          placeholder="Enter your password..."
-          id="password"
-          name="password"
+          type="text"
+          placeholder="Enter concluding message..."
+          id="conclusion"
+          name="conclusion"
           required
+          onChange={(e) => setConclusion(e.target.value)}
+          value={conclusion}
           className="focus:!outline-none rounded-t-md bg-white p-2 w-1/2 border-b"
         />
       </div>
 
       <div className="flex flex-col items-center w-full mb-5">
-        <label htmlFor="password" className="w-1/2 text-xs">
-          Password:
+        <label htmlFor="signature" className="w-1/2 text-xs">
+          Signature:
         </label>
         <input
-          type="password"
-          placeholder="Enter your password..."
-          id="password"
-          name="password"
+          type="text"
+          placeholder="Enter name of unit head..."
+          id="signature"
+          name="signature"
           required
-          className="focus:!outline-none rounded-t-md bg-white p-2 w-1/2 border-b"
-        />
-      </div>
-
-      <div className="flex flex-col items-center w-full mb-5">
-        <label htmlFor="password" className="w-1/2 text-xs">
-          Password:
-        </label>
-        <input
-          type="password"
-          placeholder="Enter your password..."
-          id="password"
-          name="password"
-          required
-          className="focus:!outline-none rounded-t-md bg-white p-2 w-1/2 border-b"
-        />
-      </div>
-
-      <div className="flex flex-col items-center w-full mb-5">
-        <label htmlFor="password" className="w-1/2 text-xs">
-          Password:
-        </label>
-        <input
-          type="password"
-          placeholder="Enter your password..."
-          id="password"
-          name="password"
-          required
+          onChange={(e) => setSignature(e.target.value)}
+          value={signature}
           className="focus:!outline-none rounded-t-md bg-white p-2 w-1/2 border-b"
         />
       </div>
 
       <div className="flex items-center mt-10 justify-evenly">
-        <button className="px-3 py-2 text-white transition-colors bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900">
-          Add new record
+        <button
+          className="px-3 py-2 text-white transition-colors bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900"
+          onClick={(e) => {
+            saveReports(e, {
+              records,
+              month,
+              year,
+              unitId: unit?.unitId,
+              appreciation,
+              challenges,
+              testimonies,
+              prayerRequest,
+              conclusion,
+              signature,
+            });
+          }}
+        >
+          Save Report
         </button>
         <button className="px-3 py-2 text-white transition-colors bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900">
-          Save records
-        </button>
-        <button className="px-3 py-2 text-white transition-colors bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900">
-          Remove record
+          Download Report
         </button>
       </div>
     </form>

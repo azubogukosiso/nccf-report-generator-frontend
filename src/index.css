@@ -31,6 +31,25 @@
   }
 }
 
+@layer components {
+  .ProseMirror {
+    @apply outline-none min-h-[200px] p-4 border border-gray-300 rounded;
+    white-space: pre-wrap;
+  }
+
+  .ProseMirror ul {
+    @apply list-disc pl-6 my-4;
+  }
+
+  .ProseMirror li {
+    @apply my-1;
+  }
+
+  .ProseMirror p {
+    @apply my-2;
+  }
+}
+
 html {
   font-family: "Raleway", sans-serif;
   background: rgb(255, 255, 173);

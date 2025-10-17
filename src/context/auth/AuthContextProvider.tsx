@@ -27,8 +27,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     fetchData();
   }, []);
 
-  console.log("AuthContext state: ", state);
-
   const contextValue: AuthContextType = {
     unit: state.unit,
     dispatch,
