@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 type RecordComponentProps = {
   index: number;
-  month: string;
-  year: string;
-  id: string;
+  month: string | undefined;
+  year: string | undefined;
+  id: string | undefined;
   recordNum: number;
   onDelete: () => void;
 };

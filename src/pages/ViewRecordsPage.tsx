@@ -29,7 +29,8 @@ const ViewRecordsPage = () => {
     },
   });
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: string | undefined) => {
+    if (!id) return;
     deleteMutation.mutate(id);
   };
 
@@ -64,13 +65,13 @@ const ViewRecordsPage = () => {
       <div className="flex flex-col items-center justify-center">
         {data.map((record: recordDataType, index: number) => (
           <RecordComponent
-            key={record._id}
+            key={record?._id}
             index={index}
-            month={capitalizeFirstLetter(record.month)}
-            year={record.year}
-            id={record._id}
+            month={capitalizeFirstLetter(record?.month)}
+            year={record?.year}
+            id={record?._id}
             recordNum={data.length}
-            onDelete={() => handleDelete(record._id)}
+            onDelete={() => handleDelete(record?._id)}
           />
         ))}
       </div>

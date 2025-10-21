@@ -1,11 +1,42 @@
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
+import type { reportDataType } from "../types/reportDataType";
+
 import NavbarComponent from "../components/NavbarComponent";
 import ReportComponent from "../components/ReportComponent";
 
 import { useAuthContext } from "../hooks/useAuthContext";
+import { capitalizeFirstLetter } from "../functions/capitalizeFirstLetter";
+import { deleteReports } from "../functions/deleteReports";
 
 const ViewReportsPage = () => {
   const { unit } = useAuthContext();
 
+  const queryClient = useQueryClient();
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["viewReportsPageData"],
+    queryFn: () =>
+      fetch(`${import.meta.env.VITE_API_URL}/reports`).then((res) =>
+        res.json()
+      ),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteReports,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["viewReportsPageData"] });
+    },
+  });
+
+  const handleDelete = (id: string | undefined) => {
+    if (!id) return;
+    deleteMutation.mutate(id);
+  };
+
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occured: " + error.message;
   return (
     <>
       <NavbarComponent />
@@ -30,11 +61,19 @@ const ViewReportsPage = () => {
 
         <p>Unit: {unit?.unitName}</p>
       </div>
-      <ReportComponent />
-      <ReportComponent />
-      <ReportComponent />
-      <ReportComponent />
-      <ReportComponent />
+      <div className="flex flex-col items-center justify-center">
+        {data.map((report: reportDataType, index: number) => (
+          <ReportComponent
+            key={report?._id}
+            index={index}
+            month={capitalizeFirstLetter(report?.month)}
+            year={report?.year}
+            id={report?._id}
+            recordNum={data.length}
+            onDelete={() => handleDelete(report?._id)}
+          />
+        ))}
+      </div>
     </>
   );
 };
