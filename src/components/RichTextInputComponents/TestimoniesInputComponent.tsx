@@ -6,21 +6,25 @@ import { EditorContent, useEditor } from "@tiptap/react";
 
 type TestimoniesInputComponentProps = {
   setTestimonies: React.Dispatch<React.SetStateAction<string>>;
+  testimonies: string;
 };
 
 const TestimoniesInputComponent = ({
   setTestimonies,
+  testimonies,
 }: TestimoniesInputComponentProps) => {
+  const testimonyList = testimonies.split("\n\n\n\n").filter((el) => el !== "");
+
   const editor = useEditor({
     extensions: [Document, Paragraph, Text, BulletList, ListItem],
     onUpdate: ({ editor }) => {
       setTestimonies(editor.getText());
     },
-    content: `
-          <ul>
-            <li></li>
-          </ul>
-        `,
+    content: testimonies
+      ? `<ul>${testimonyList.map((t) => `<li>${t}</li>`).join("")}</ul>`
+      : `<ul>
+        <li></li>
+      </ul>`,
   });
 
   return (
@@ -28,7 +32,7 @@ const TestimoniesInputComponent = ({
       <div className="flex justify-between mb-2 sticky top-0 bg-gray-100 z-1 p-2 w-[30%] rounded-lg">
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className="bg-blue-600 font-bold rounded-lg cursor-pointer text-white focus:scale-95 transition-all p-1"
+          className="p-1 font-bold text-white transition-all bg-blue-600 rounded-lg cursor-pointer focus:scale-95"
         >
           <svg
             viewBox="0 0 24 24"
@@ -43,7 +47,7 @@ const TestimoniesInputComponent = ({
 
         <button
           onClick={() => editor.chain().focus().splitListItem("listItem").run()}
-          className="bg-blue-600 font-bold rounded-lg cursor-pointer text-white focus:scale-95 transition-all p-1"
+          className="p-1 font-bold text-white transition-all bg-blue-600 rounded-lg cursor-pointer focus:scale-95"
         >
           <svg
             viewBox="0 0 24 24"
@@ -60,7 +64,7 @@ const TestimoniesInputComponent = ({
           onClick={() => {
             editor.chain().focus().sinkListItem("listItem").run();
           }}
-          className="bg-blue-600 font-bold rounded-lg cursor-pointer text-white focus:scale-95 transition-all p-1"
+          className="p-1 font-bold text-white transition-all bg-blue-600 rounded-lg cursor-pointer focus:scale-95"
         >
           <svg
             viewBox="0 0 24 24"
@@ -75,7 +79,7 @@ const TestimoniesInputComponent = ({
 
         <button
           onClick={() => editor.chain().focus().liftListItem("listItem").run()}
-          className="bg-blue-600 font-bold rounded-lg cursor-pointer text-white focus:scale-95 transition-all p-1"
+          className="p-1 font-bold text-white transition-all bg-blue-600 rounded-lg cursor-pointer focus:scale-95"
         >
           <svg
             viewBox="0 0 24 24"

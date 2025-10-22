@@ -6,21 +6,27 @@ import { EditorContent, useEditor } from "@tiptap/react";
 
 type PrayerRequestInputComponentProps = {
   setPrayerRequest: React.Dispatch<React.SetStateAction<string>>;
+  prayerRequest: string;
 };
 
 const PrayerRequestInputComponent = ({
   setPrayerRequest,
+  prayerRequest,
 }: PrayerRequestInputComponentProps) => {
+  const prayerRequestList = prayerRequest
+    .split("\n\n\n\n")
+    .filter((el) => el !== "");
+
   const editor = useEditor({
     extensions: [Document, Paragraph, Text, BulletList, ListItem],
     onUpdate: ({ editor }) => {
       setPrayerRequest(editor.getText());
     },
-    content: `
-          <ul>
+    content: prayerRequest
+      ? `<ul>${prayerRequestList.map((t) => `<li>${t}</li>`).join("")}</ul>`
+      : `<ul>
             <li></li>
-          </ul>
-        `,
+          </ul>`,
   });
 
   return (
@@ -28,7 +34,7 @@ const PrayerRequestInputComponent = ({
       <div className="flex justify-between mb-2 sticky top-0 bg-gray-100 z-1 p-2 w-[30%] rounded-lg">
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className="bg-blue-600 font-bold rounded-lg cursor-pointer text-white focus:scale-95 transition-all p-1"
+          className="p-1 font-bold text-white transition-all bg-blue-600 rounded-lg cursor-pointer focus:scale-95"
         >
           <svg
             viewBox="0 0 24 24"
@@ -43,7 +49,7 @@ const PrayerRequestInputComponent = ({
 
         <button
           onClick={() => editor.chain().focus().splitListItem("listItem").run()}
-          className="bg-blue-600 font-bold rounded-lg cursor-pointer text-white focus:scale-95 transition-all p-1"
+          className="p-1 font-bold text-white transition-all bg-blue-600 rounded-lg cursor-pointer focus:scale-95"
         >
           <svg
             viewBox="0 0 24 24"
@@ -60,7 +66,7 @@ const PrayerRequestInputComponent = ({
           onClick={() => {
             editor.chain().focus().sinkListItem("listItem").run();
           }}
-          className="bg-blue-600 font-bold rounded-lg cursor-pointer text-white focus:scale-95 transition-all p-1"
+          className="p-1 font-bold text-white transition-all bg-blue-600 rounded-lg cursor-pointer focus:scale-95"
         >
           <svg
             viewBox="0 0 24 24"
@@ -75,7 +81,7 @@ const PrayerRequestInputComponent = ({
 
         <button
           onClick={() => editor.chain().focus().liftListItem("listItem").run()}
-          className="bg-blue-600 font-bold rounded-lg cursor-pointer text-white focus:scale-95 transition-all p-1"
+          className="p-1 font-bold text-white transition-all bg-blue-600 rounded-lg cursor-pointer focus:scale-95"
         >
           <svg
             viewBox="0 0 24 24"

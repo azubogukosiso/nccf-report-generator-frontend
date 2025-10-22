@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import SignInPage from "./pages/SignInPage";
 import InputRecordsPage from "./pages/InputRecordsPage";
 import EditRecordsPage from "./pages/EditRecordsPage";
+import EditReportDetailsPage from "./pages/EditReportDetailsPage";
 import ViewRecordsPage from "./pages/ViewRecordsPage";
 import ViewReportsPage from "./pages/ViewReportsPage";
 import InputReportDetailsPage from "./pages/InputReportDetailsPage";
@@ -18,7 +19,7 @@ function App() {
   };
 
   const query = useQuery();
-  const recordId = query.get("id");
+  const id = query.get("id");
 
   return (
     <div className="h-screen min-h-screen p-10">
@@ -38,11 +39,7 @@ function App() {
         <Route
           path="edit-record"
           element={
-            unit ? (
-              <EditRecordsPage recordId={recordId} />
-            ) : (
-              <Navigate to="/signin" />
-            )
+            unit ? <EditRecordsPage recordId={id} /> : <Navigate to="/signin" />
           }
         ></Route>
         <Route
@@ -57,7 +54,17 @@ function App() {
           path="input-report"
           element={
             unit ? (
-              <InputReportDetailsPage recordId={recordId} />
+              <InputReportDetailsPage recordId={id} />
+            ) : (
+              <Navigate to="/signin" />
+            )
+          }
+        ></Route>
+        <Route
+          path="edit-report"
+          element={
+            unit ? (
+              <EditReportDetailsPage reportId={id} />
             ) : (
               <Navigate to="/signin" />
             )

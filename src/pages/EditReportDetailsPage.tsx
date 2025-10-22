@@ -1,22 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 
-import InputRecordsComponent from "../components/InputRecordsComponent";
+import InputReportDetailsComponent from "../components/InputReportDetailsComponent";
 import NavbarComponent from "../components/NavbarComponent";
 
 import { useAuthContext } from "../hooks/useAuthContext";
 
 type IDProps = {
-  recordId: string | null;
+  reportId: string | null;
 };
 
-const EditRecordsPage = ({ recordId }: IDProps) => {
+const EditReportDetailsPage = ({ reportId }: IDProps) => {
   const { unit } = useAuthContext();
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["editRecordsPageData", recordId],
+    queryKey: ["editReportsPageData", reportId],
     queryFn: () =>
-      fetch(`${import.meta.env.VITE_API_URL}/records?id=${recordId}`).then(
-        (res) => res.json()
+      fetch(`${import.meta.env.VITE_API_URL}/reports/${reportId}`).then((res) =>
+        res.json()
       ),
     staleTime: 0,
     gcTime: 0,
@@ -47,17 +47,21 @@ const EditRecordsPage = ({ recordId }: IDProps) => {
               <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z" />
             </svg>
           </label>
-          <h1>Edit Records</h1>
+          <h1>Edit Report Details</h1>
         </div>
 
         <p>Unit: {unit?.unitName}</p>
       </div>
 
       <div className="flex items-center justify-center">
-        <InputRecordsComponent recordDetails={data} recordId={recordId} />
+        <InputReportDetailsComponent
+          reportDetails={data}
+          records={data.records}
+          reportId={reportId}
+        />
       </div>
     </>
   );
 };
 
-export default EditRecordsPage;
+export default EditReportDetailsPage;
