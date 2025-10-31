@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { saveReports } from "../functions/saveReports";
 import { editReports } from "../functions/editReports";
+import { downloadReport } from "../functions/downloadReport";
 
 import { useAuthContext } from "../hooks/useAuthContext";
 import type { editReportDetailsType } from "../types/editReportDetailsType";
@@ -196,7 +197,24 @@ const InputReportDetailsComponent = ({
         >
           {reportId ? "Edit Report" : "Save Report"}
         </button>
-        <button className="px-3 py-2 text-white transition-colors bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900">
+        <button
+          className="px-3 py-2 text-white transition-colors bg-blue-800 rounded-lg cursor-pointer hover:bg-blue-900"
+          onClick={(e) =>
+            downloadReport(e, {
+              records,
+              month,
+              year,
+              appreciation,
+              challenges,
+              testimonies,
+              prayerRequest,
+              conclusion,
+              signature,
+              unitId: unit?.unitId,
+              reportId,
+            })
+          }
+        >
           Download Report
         </button>
       </div>
